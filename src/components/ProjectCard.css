@@ -1,0 +1,140 @@
+.project-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  opacity: 1;
+}
+
+.project-card:hover {
+  border-color: rgba(36,71,249,.3);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: linear-gradient(145deg, #e9edff, #f8f9ff);
+  padding: 22px 22px 0;
+}
+
+.project-card__browser { height: 100%; overflow: hidden; border: 1px solid rgba(17,19,24,.12); border-bottom: 0; border-radius: 13px 13px 0 0; background: white; box-shadow: 0 18px 40px rgba(31,42,84,.16); }
+.project-card__browser-bar { height: 31px; display: flex; align-items: center; gap: 5px; padding: 0 10px; background: #f3f4f7; border-bottom: 1px solid #e5e7ec; direction: ltr; }
+.project-card__browser-bar > span { width: 7px; height: 7px; border-radius: 50%; background: #ff665e; }
+.project-card__browser-bar > span:nth-child(2) { background: #ffbd44; }
+.project-card__browser-bar > span:nth-child(3) { background: #31c854; }
+.project-card__browser-address { margin-inline-start: 7px; flex: 1; min-width: 0; padding: 3px 9px; border-radius: 5px; background: white; color: #858a96; font: 9px/1.2 var(--font-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.project-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform var(--transition-slow);
+}
+
+.project-card__image-wrapper--app { padding: 18px 12px 0; background: radial-gradient(circle at 50% 20%, #fff, #e9edff); }
+.project-card__phones { height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 8px; direction: ltr; }
+.project-card__phone { position: relative; width: 30%; height: 92%; padding: 5px 4px 0; overflow: hidden; border: 2px solid #171a21; border-bottom: 0; border-radius: 16px 16px 0 0; background: #171a21; box-shadow: 0 14px 28px rgba(17,19,24,.2); transform: translateY(10px); }
+.project-card__phone:nth-child(2) { height: 100%; transform: translateY(2px); z-index: 1; }
+.project-card__phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 11px 11px 0 0; }
+.project-card__phone-speaker { position: absolute; z-index: 2; top: 8px; left: 50%; width: 26%; height: 4px; border-radius: 5px; background: #171a21; transform: translateX(-50%); }
+
+.project-card:hover .project-card__image {
+  transform: scale(1.03);
+}
+
+.project-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+}
+
+.project-card__placeholder svg {
+  opacity: 0.5;
+}
+
+.project-card__placeholder span {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.project-card__content {
+  padding: 24px 26px 28px;
+}
+
+.project-card__name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.project-card__description {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.project-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.project-card__category {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--color-accent-light);
+  color: var(--color-accent);
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-highlight);
+  transition: all var(--transition-fast);
+}
+
+.project-card__link:hover {
+  gap: 10px;
+}
+
+.project-card__link svg {
+  transition: transform var(--transition-fast);
+}
+
+.project-card__link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .project-card__image-wrapper { padding-inline: 14px; }
+  .project-card__phones { gap: 5px; }
+}

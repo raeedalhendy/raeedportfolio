@@ -1,0 +1,101 @@
+.services {
+  background: #f7f8fc;
+  color: var(--color-text);
+}
+
+.services::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 20%, rgba(36,71,249,.09), transparent 28%); pointer-events: none; }
+
+.services__header {
+  text-align: center;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.services__header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services__title {
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 8px;
+}
+
+.services__subtitle {
+  font-size: 1rem;
+  color: var(--color-text-light);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.services__card {
+  background: rgba(255,255,255,.88);
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 34px 28px;
+  text-align: right;
+  transition: all var(--transition-normal);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.services__card--visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s ease;
+}
+
+.services__card:hover {
+  border-color: var(--color-highlight);
+  box-shadow: 0 20px 60px rgba(17,19,24,.1);
+  background: white;
+}
+
+.services__card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(36,71,249,.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 24px auto;
+  color: var(--color-highlight);
+  transition: all var(--transition-normal);
+}
+
+.services__card:hover .services__card-icon {
+  background: var(--color-highlight);
+  color: var(--color-text);
+}
+
+.services__card-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.services__card-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
