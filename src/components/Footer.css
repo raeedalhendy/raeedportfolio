@@ -1,8 +1,7 @@
 .footer {
-  background: #f8f9fc;
+  background: var(--color-bg);
   color: var(--color-text);
-  border-top: 1px solid var(--color-border);
-  padding: 52px 0 26px;
+  padding: 24px 0;
 }
 
 .footer__content {
@@ -10,89 +9,58 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  flex-wrap: wrap;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .footer__brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
+  min-width: 44px;
+  min-height: 44px;
+  font-family: var(--font-secondary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.09em;
 }
 
-.footer__logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.footer__logo img {
-  width: 112px;
-  max-width: none;
-}
-
-.footer__name {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.footer__title {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-.footer__links {
-  display: flex;
-  gap: 8px;
-}
-
-.footer__link {
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 10px;
-  border: 1px solid var(--color-border);
-  transition: all var(--transition-fast);
-  opacity: 0.8;
-}
-
-.footer__link:hover {
-  background: var(--color-accent-light);
+.footer__brand span {
   color: var(--color-accent);
-  opacity: 1;
-}
-
-.footer__bottom {
-  padding-top: 20px;
-  text-align: center;
 }
 
 .footer__copyright {
-  font-size: 0.8rem;
-  opacity: 0.5;
+  margin: 0;
+  color: var(--color-text-light);
+  font-family: var(--font-secondary);
+  font-size: 0.68rem;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+.footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 44px;
+  font-size: 0.8rem;
+}
+
+.footer__top span {
+  font-family: var(--font-secondary);
+  font-size: 1.25rem;
+}
+
+.footer__top:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 540px) {
   .footer__content {
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+  }
+
+  .footer__copyright {
+    order: 3;
+    flex-basis: 100%;
     text-align: center;
-  }
-
-  .footer__brand {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .footer__links {
-    width: 100%;
-    justify-content: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
   }
 }

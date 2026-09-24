@@ -1,27 +1,14 @@
-// Profile Data - Easy to edit
-// Edit this file to update your personal information
-
+// Personal information and contact links used throughout the site.
 export const profile = {
-  name: "Raeed Alhendy",
-  title: "مطوّر برمجيات متكامل",
-  tagline: "أساعدك على تحويل فكرتك إلى موقع أو تطبيق أو نظام احترافي يلائم احتياجات مشروعك",
-
-  // About section - edit this text
-  about: `
-    مطوّر برمجيات متكامل، لدي خبرة في بناء تطبيقات الويب والهاتف المحمول والأنظمة المخصصة.
-    أعمل على تحويل الأفكار إلى منتجات رقمية احترافية مع التركيز على الجودة والأداء.
-  `,
-
-  // Contact links - edit these
+  name: 'Raeed Alhendy',
+  nameAr: 'رائد الهندي',
+  title: 'مطوّر برمجيات متكامل',
+  tagline: 'أطوّر مواقع ومتاجر وتطبيقات تجمع بين جمال التصميم وسهولة الاستخدام.',
+  about: 'أنا رائد، مطوّر برمجيات أعمل على مواقع الويب وتطبيقات الهاتف والأنظمة المخصصة. أحوّل الأفكار إلى منتجات سهلة الاستخدام، مع عناية بكل تفصيل.',
+  aboutDetail: 'أهتم بوضوح الواجهات وتنظيم الشيفرة وسرعة الأداء. من الشاشة الأولى إلى الخطوة الأخيرة، لكل تفصيل أثر في تجربة المستخدم.',
   contact: {
-    whatsapp: "+963969477454",
-    telegram: "https://t.me/+963969477454",
-  },
-
-  // Social links (optional)
-  social: {
-    github: "",    // Add your GitHub
-    linkedin: "",  // Add your LinkedIn
+    whatsapp: '+963969477454',
+    telegram: 'https://t.me/+963969477454',
   },
 };
 

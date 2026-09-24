@@ -1,92 +1,68 @@
-import { useState, useEffect } from 'react';
-import logo from '../assets/fornav.png';
+import { useEffect, useRef, useState } from 'react';
 import './Navbar.css';
 
+const links = [
+  { id: 'projects', label: 'أعمالي' },
+  { id: 'services', label: 'خدماتي' },
+  { id: 'skills', label: 'مهاراتي' },
+  { id: 'about', label: 'عنّي' },
+];
+
 function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState('');
+  const menuButton = useRef(null);
+  const header = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) setActive(entry.target.id); });
+    }, { rootMargin: '-15% 0px -65% 0px' });
+    ['top', ...links.map(link => link.id), 'contact'].forEach(id => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+    return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
-    }
-  };
+  useEffect(() => {
+    if (!menuOpen) return;
+    const dismiss = event => {
+      if (event.key === 'Escape') { setMenuOpen(false); menuButton.current?.focus(); }
+      if (event.type === 'pointerdown' && !header.current?.contains(event.target)) setMenuOpen(false);
+    };
+    const desktop = window.matchMedia('(min-width: 761px)');
+    const closeOnDesktop = event => { if (event.matches) setMenuOpen(false); };
+    document.addEventListener('keydown', dismiss);
+    document.addEventListener('pointerdown', dismiss);
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => {
+      document.removeEventListener('keydown', dismiss);
+      document.removeEventListener('pointerdown', dismiss);
+      desktop.removeEventListener('change', closeOnDesktop);
+    };
+  }, [menuOpen]);
 
-  const navLinks = [
-    { id: 'services', label: 'الخدمات' },
-    { id: 'projects', label: 'المشاريع' },
-    { id: 'about', label: 'عني' },
-    { id: 'contact', label: 'تواصل' },
-  ];
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="navbar__container">
-        <a 
-          href="#" 
-          className="navbar__logo"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setIsMobileMenuOpen(false);
-          }}
-        >
-          <img src={logo} alt="Raeed Alhendy" className="navbar__logo-image" />
+    <header className="navbar" ref={header}>
+      <nav className="navbar__container container" aria-label="التنقل الرئيسي">
+        <a className="navbar__brand" href="#top" onClick={closeMenu} aria-label="رائد الهندي — الرئيسية">
+          <span className="navbar__monogram" dir="ltr">ra<span>.</span></span>
+          <span className="navbar__identity"><strong>رائد الهندي</strong><small dir="ltr">DEVELOPER & MAKER</small></span>
         </a>
-
-        {/* Desktop Navigation */}
-        <ul className="navbar__links">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <button
-                className="navbar__link"
-                onClick={() => scrollToSection(link.id)}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        {/* Mobile Menu Button */}
-        <button
-          className={`navbar__menu-btn ${isMobileMenuOpen ? 'navbar__menu-btn--open' : ''}`}
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <div className={`navbar__mobile-menu ${isMobileMenuOpen ? 'navbar__mobile-menu--open' : ''}`}>
-        <ul className="navbar__mobile-links">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <button
-                className="navbar__mobile-link"
-                onClick={() => scrollToSection(link.id)}
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+        <div className="navbar__links">
+          {links.map(link => <a key={link.id} href={'#' + link.id} className={active === link.id ? 'is-active' : ''} aria-current={active === link.id ? 'location' : undefined}>{link.label}</a>)}
+        </div>
+        <a className="navbar__contact" href="#contact" onClick={closeMenu}>لنتواصل <span aria-hidden="true">↖</span></a>
+        <button ref={menuButton} className={'navbar__toggle ' + (menuOpen ? 'is-open' : '')} onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'إغلاق القائمة' : 'فتح القائمة'} aria-expanded={menuOpen} aria-controls="mobile-nav"><span /><span /></button>
+      </nav>
+      <nav id="mobile-nav" className="navbar__mobile" aria-label="قائمة التنقل على الهاتف" hidden={!menuOpen}>
+        {links.map(link => <a key={link.id} href={'#' + link.id} onClick={closeMenu}>{link.label}<span aria-hidden="true">↖</span></a>)}
+        <a href="#contact" onClick={closeMenu}>لنتواصل<span aria-hidden="true">↖</span></a>
+      </nav>
+    </header>
   );
 }
 

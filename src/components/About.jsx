@@ -1,36 +1,35 @@
 import { profile } from '../data/profile';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
-import logo from '../assets/logo.png';
-import { motion } from 'framer-motion';
 import './About.css';
 
 function About() {
-  const { ref, isVisible } = useScrollAnimation(0.15);
-
   return (
-    <section id="about" className="about section">
-      <div className="container" ref={ref}>
-        <motion.div
-          className={`about__content ${isVisible ? 'about__content--visible' : ''}`}
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="about__text">
-            <h2 className="about__title">عني</h2>
-            <p className="about__role">{profile.title}</p>
-            <div className="about__bio">
-              <p>{profile.about}</p>
-            </div>
+    <section id="about" className="about section" aria-labelledby="about-title">
+      <div className="container about__layout">
+        <div className="about__text">
+          <p className="eyebrow" dir="ltr">04 / THE PERSON BEHIND THE CODE</p>
+          <h2 id="about-title" className="about__title">أهلًا، أنا رائد<span> :)</span></h2>
+          <p className="about__role">{profile.title}</p>
+          <div className="about__bio">
+            <p>{profile.about}</p>
+            <p>{profile.aboutDetail}</p>
           </div>
+          <div className="about__signature" lang="en" dir="ltr">
+            <span className="about__signature-line" aria-hidden="true" />
+            {profile.name}
+          </div>
+        </div>
 
-          <div className="about__visual">
-            <motion.div className="about__logo-card" whileHover={{ y: -7, rotate: -1 }} transition={{ type: 'spring', stiffness: 260, damping: 20 }}>
-              <img src={logo} alt="Raeed Alhendy" className="about__logo" />
-            </motion.div>
+        <div className="about__visual">
+          <div className="about__note-header" aria-hidden="true">
+            <span dir="ltr">A LITTLE ABOUT MY APPROACH</span>
+            <span className="about__asterisk">✳</span>
           </div>
-        </motion.div>
+          <p className="about__statement">الفكرة لك.<br />والتفاصيل<br /><span>مهمّتي.</span></p>
+          <div className="about__note-footer" aria-hidden="true">
+            <span dir="ltr">&lt; / &gt;</span>
+            <span>من الفكرة إلى أدقّ التفاصيل</span>
+          </div>
+        </div>
       </div>
     </section>
   );
